@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<style>
+    .create-box{
+        width: 70%;
+        margin-bottom: 30px;
+    }
+    form {
+        width: 100%;
+    }
+    .titleForm{
+        width: 100%;
+        height: 50px;
+        margin-bottom: 15px;
+        padding-left: 15px;
+    }
+    textarea{
+        width: 100%;
+        padding: 15px;
+    }
+    .categoryForm{
+        width: 50%;
+        height: 50px;
+        margin-bottom: 15px;
+        padding-left: 15px;
+    } 
+    
+    
+</style>
+
+<body>
+    
+    {% extends "page/base.html" %}
+
+    {% block title %}
+    Tạo bài viết mới
+    {% endblock title %}
+
+    {% block content %}
+
+        {% if user.username %}
+        <div class="create-box">
+            <form method='POST' enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.title}}
+
+                {{form.category}}
+
+                {{form.body}} <br><br>
+
+                <span style="font-size: 16px;">Image: </span>{{form.image}} <br>
+                <img id="preview-image" src="" alt="Preview" style="display: none; width: 100%;"> <br>
+
+                <script>
+                    function previewImage(input) {
+                        if (input.files && input.files[0]) {
+                            var reader = new FileReader();
+                            
+                            reader.onload = function (e) {
+                                document.getElementById('preview-image').src = e.target.result;
+                                document.getElementById('preview-image').style.display = 'block';
+                            }
+                            
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    }
+                
+                    document.getElementById('id_image').addEventListener('change', function() {
+                        previewImage(this);
+                    });
+                </script>
+
+                <span style="font-size: 16px;">Audio: </span>{{form.file}} <br><br>
+
+                <button type="submit" class="button-create"
+                style="
+                    background: #2FA1B3;
+                    float: right;
+                    color: #fff;
+                    border: none;
+                    border-radius: 5px;
+                    font-size: 16px;
+                    width: 60px;
+                    height: 40px;
+                "
+                >Create</button>
+            </form>  
+            
+
+        </div>
+        {% else %}
+        <h4>Bạn chưa đăng nhập</h4>
+        {% endif %}
+
+    
+        
+
+    {% endblock content %}
+
+</body>
+</html>

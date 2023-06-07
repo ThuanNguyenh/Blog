@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% load static %}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--  -->
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300&display=swap" rel="stylesheet">
+    <!-- MDB -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- MDB -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
+    ></script>
+    <!--  -->
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="{% static 'css\bootstrap.min.css' %}"
+      type="text/css"
+    />
+
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+
+  <style>
+    html,
+    body {
+      /* display: flex; */
+      width: 100%;
+      align-items: center;
+      height: 100%;
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;    
+    };
+
+    .sidebar ul li .side.active {
+      background: #7FAD39;
+    }
+
+    a:hover {
+      /* Quy tắc kiểu cho hiệu ứng hover */
+      color: #2FA1B3 !important;
+      transition: color 0.3s ease,
+    }
+
+    .box4{
+      overflow: hidden;
+      border-radius: 5px
+    }
+    .box4 img{
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      transition: opacity .2s ease-in-out,transform .7s,-webkit-transform .7s,-moz-transform .7s;
+    }
+    .box4 img:hover{
+      transform: scale(1.1);
+    }
+
+    .create i{
+      -webkit-transition: -webkit-transform .5s ease-in-out;
+              transition:         transform .5s ease-in-out;
+    }
+    .create i:hover{
+      -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+    }
+
+  </style>
+
+  <body>
+    <div class="container-fluid" style="min-height: 100%">
+      <!-- nav -->
+      <nav class="navbar fixed-top" style="height: 55px; background: #2FA1B3">
+        <div class="container-fluid mx-4" style="margin-top: -10px;">
+          <a class="navbar-brand" href="/"><img
+            style="height: 50px;"
+            src="{% static 'images/logoBlog3.png' %}" alt=""></a>
+          <!-- profile -->
+          <div style="padding-top: 14px;" class="d-sm-none d-none d-md-none d-lg-block d-xl-block">
+            <ul class="d-flex" style="list-style: none">
+              
+              {% if user.username %}
+              <div class="dropstart">
+                <button type="button" style="background: #fff;" class="btn dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                  {{user.username}}
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                  <li><a class="dropdown-item" href="{% url 'manage' %}">My blog</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </div>
+              {% else %}
+                <button style="border: none; background-color: #353434; height: 35px; "><a style="text-decoration: none; color: #f1f1f1;" href="{% url 'login' %}">Login</a></button>
+                <button style="border: none; background-color: #7FAD39; height: 35px;"><a style="text-decoration: none; color: #f1f1f1;" href="{% url 'register' %}">Sign up</a></button>
+
+              {% endif %}
+
+            </ul>
+          </div>
+          <!-- profile -->
+
+          {% comment %} drawer {% endcomment %}
+
+          <button
+            class="navbar-toggler d-sm-block d-block d-md-block d-lg-none d-xl-none"
+            type="button"
+            aria-expanded="false"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="offcanvas offcanvas-end"
+            tabindex="-1"
+            id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel"
+          >
+            <div class="offcanvas-header">
+              <i style="font-size: 20px" class="bi bi-person-circle"></i>
+              {% if user.username %}
+              <h5 style="font-weight: bold;" class="offcanvas-title" id="offcanvasNavbarLabel">
+                
+                {{user.username}}
+                
+                {% else %}
+                  <button style="border: none; background-color: #353434; "><a style="text-decoration: none; color: #f1f1f1;" href="{% url 'login' %}">Login</a></button>
+                  <button style="border: none; background-color: #7FAD39; "><a style="text-decoration: none; color: #f1f1f1;" href="{% url 'register' %}">Sign up</a></button>
+
+                {% endif %}
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
+            </div>
+            
+            <!-- body -->
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <!--  -->
+
+                <li>
+                  <div>
+                    <a href="" class="d-flex text-decoration-none">
+                      <i style="font-size: 20px" class="bi bi-bag-check"></i>
+                      <p style="padding-top: 5px; padding-left: 20px">
+                        Giỏ hàng
+                      </p>
+                    </a>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <a href="" class="d-flex text-decoration-none">
+                      <i style="font-size: 20px" class="bi bi-bell"></i>
+                      <p style="padding-top: 5px; padding-left: 20px">
+                        Thông báo
+                      </p>
+                    </a>
+                  </div>
+                </li>
+
+                <!--  -->
+                <hr />
+
+                <!-- menu -->
+                <li>
+                  <div>
+                    <a href="/" class="d-flex text-decoration-none">
+                      <i style="font-size: 20px;" class="bi bi-house"></i>
+                      <p style="padding-top: 5px; padding-left: 20px">
+                        Home
+                      </p>
+                    </a>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <a href="{% url 'blog' %}" class="d-flex text-decoration-none">
+                      <i style="font-size: 20px;" class="bi bi-journal-check"></i>
+                      <p style="padding-top: 5px; padding-left: 20px">
+                        Blog
+                      </p>
+                    </a>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <a href="{% url 'contact' %}" class="d-flex text-decoration-none">
+                      <i style="font-size: 20px;" class="bi bi-person-rolodex"></i>
+                      <p style="padding-top: 5px; padding-left: 20px">
+                        Contact
+                      </p>
+                    </a>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <a href="" class="d-flex text-decoration-none">
+                      <i style="font-size: 20px;" class="bi bi-shop-window"></i>
+                      <p style="padding-top: 5px; padding-left: 20px">
+                        Shop
+                      </p>
+                    </a>
+                  </div>
+                </li>
+                <!-- menu -->
+                <hr>
+
+                <!--  -->
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Settings
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li>
+                      <a class="dropdown-item" href="#">Another action</a>
+                    </li>
+                    <li>
+                      <hr class="dropdown-divider" />
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <!--  --> <hr>
+              <li style="list-style: none;">
+                <div>
+                  <a href="{% url 'logout' %}" class="d-flex text-decoration-none">
+                    <i style="font-size: 20px;" class="bi bi-box-arrow-right"></i>
+                    <p style="padding-top: 5px; padding-left: 20px">
+                      Logout
+                    </p>
+                  </a>
+                </div>
+              </li>
+              <!--  -->
+
+            </div>
+            <!-- body -->
+          </div>
+        </div>
+      </nav>
+      <!-- nav -->
+      
+
+      <!-- sliderbar -->
+      <div class="container-fluid" style="margin-top: 5.5rem; width: 90%;">
+        <div class="row gy-3">
+          <!-- sliderbar -->
+          <div class="col-sm-1 d-sm-none d-none d-md-none d-lg-block d-xl-block sidebar" style="position: fixed; ">
+            <div style="text-align: left" class="bs sliderbar">
+              
+              <ul class="nav flex-column">
+
+                <li>
+                  
+                    <a href="{% url 'create' %}" class="create d-block text-decoration-none">
+                      <i class="fa fa-plus-circle fa-3x mx-2" aria-hidden="true"></i>
+                    </a>
+                    
+                 
+                </li>
+                
+                <li class="mt-4 active">
+                  <div class="side" style="width: 55px; height: 55px; border-radius: 10px;">
+                    <a onclick="toggleActive(this)" style="color: black; text-align: center; padding-top: 6px;" href="/" class="active d-block text-decoration-none">
+                      <i style="font-size: 18px;" class="bi bi-house"></i>
+                      <p style="font-size: 13px;">
+                        Home
+                      </p>
+                    </a>
+                  </div>
+                </li>
+
+                
+                <li class="mt-2">
+                  <div class="side" style="width: 55px; height: 55px; border-radius: 10px;">
+                    <a onclick="toggleActive(this)" style="color: black; text-align: center; padding-top: 6px;" href="{% url 'shop' %}" class="d-block text-decoration-none">
+                      <i style="font-size: 18px;" class="bi bi-shop-window"></i>
+                      <p style="font-size: 13px;">
+                        Shop
+                      </p>
+                    </a>
+                  </div>
+                </li>
+                
+                <li class="mt-2">
+                  <div class="side" style="width: 55px; height: 55px; border-radius: 10px;">
+                    <a onclick="toggleActive(this)" style="color: black; text-align: center; padding-top: 6px;" href="{% url 'contact' %}" class="d-block text-decoration-none">
+                      <i style="font-size: 18px;" class="bi bi-person-rolodex"></i>
+                      <p style="font-size: 13px;">
+                        Contact
+                      </p>
+                    </a>
+                  </div>
+                </li>
+                
+                <li class="mt-2">
+                  <div class="side" style="width: 55px; height: 55px;  border-radius: 10px;">
+                    <a onclick="toggleActive(this)" style="color: black; text-align: center; padding-top: 6px;" href="{% url 'blog' %}" class="d-block text-decoration-none">
+                      <i style="font-size: 18px;" class="bi bi-journal-check"></i>
+                      <p style="font-size: 13px;">
+                        Blog
+                      </p>
+                    </a>
+                  </div>
+                </li>
+                </li>
+                
+              </ul>
+            </div>
+          </div>
+
+          <!--  -->
+          
+          
+          
+          <div class="col-12 col-md-11 d-flex" >
+            <div class="col-sm-1 d-sm-none d-none d-md-none d-lg-block d-xl-block" style="width: 90px; height: 200px;"></div>
+            
+            <div class="col-12 g-0">
+                {% block content %} {% endblock content %}
+              
+            </div>
+          </div>
+
+          <!--  -->
+        </div>
+      </div>
+      <!-- sliderbar -->
+    </div>
+
+    <footer class="text-center text-white" style="background-color: #f1f1f1;">
+      <!-- Grid container -->
+      <div class="container col-sm-6 col-md-12 pt-4">
+        <!-- Section: Social media -->
+        <section class="mb-4">
+          <!-- Facebook -->
+          <a
+            class="btn btn-link btn-floating btn-lg text-dark m-1"
+            href="#!"
+            role="button"
+            data-mdb-ripple-color="dark"
+            ><i class="fab fa-facebook-f"></i
+          ></a>
+
+          <!-- Twitter -->
+          <a
+            class="btn btn-link btn-floating btn-lg text-dark m-1"
+            href="#!"
+            role="button"
+            data-mdb-ripple-color="dark"
+            ><i class="fab fa-twitter"></i
+          ></a>
+
+          <!-- Google -->
+          <a
+            class="btn btn-link btn-floating btn-lg text-dark m-1"
+            href="#!"
+            role="button"
+            data-mdb-ripple-color="dark"
+            ><i class="fab fa-google"></i
+          ></a>
+
+          <!-- Instagram -->
+          <a
+            class="btn btn-link btn-floating btn-lg text-dark m-1"
+            href="#!"
+            role="button"
+            data-mdb-ripple-color="dark"
+            ><i class="fab fa-instagram"></i
+          ></a>
+
+          <!-- Linkedin -->
+          <a
+            class="btn btn-link btn-floating btn-lg text-dark m-1"
+            href="#!"
+            role="button"
+            data-mdb-ripple-color="dark"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+          <!-- Github -->
+          <a
+            class="btn btn-link btn-floating btn-lg text-dark m-1"
+            href="#!"
+            role="button"
+            data-mdb-ripple-color="dark"
+            ><i class="fab fa-github"></i
+          ></a>
+        </section>
+        <!-- Section: Social media -->
+      </div>
+      <!-- Grid container -->
+
+      <!-- Copyright -->
+      <div
+        class="text-center text-dark p-3"
+        style="background-color: rgba(0, 0, 0, 0.2)"
+      >
+        © 2023 Copyright:
+        <a class="text-dark" href="https://www.facebook.com/xuquang.changhe.75">Nguyễn Văn Thuận</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+
+    <script src="" async defer></script>
+  </body>
+</html>

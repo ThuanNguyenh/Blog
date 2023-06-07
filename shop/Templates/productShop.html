@@ -1,0 +1,505 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+  </head>
+
+  <style>
+    .wrapper{
+      /* width: 400px; */
+      /* background: #fff; */
+      /* border-radius: 10px; */
+      padding: 20px 25px 40px;
+      /* box-shadow: 0 12px 35px rgba(0,0,0,0.1); */
+    }
+    header h2{
+      /* font-size: 24px; */
+      font-weight: 600;
+    }
+    header p{
+      margin-top: 5px;
+      font-size: 16px;
+    }
+    .price-input{
+      width: 100%;
+      display: flex;
+      margin: 30px 0 35px;
+    }
+    .price-input .field{
+      display: flex;
+      width: 100%;
+      height: 45px;
+      align-items: center;
+    }
+    .field input{
+      width: 100%;
+      height: 100%;
+      outline: none;
+      font-size: 19px;
+      margin-left: 12px;
+      border-radius: 5px;
+      text-align: center;
+      border: 1px solid #999;
+      -moz-appearance: textfield;
+    }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+    .price-input .separator{
+      width: 130px;
+      display: flex;
+      /* font-size: 19px; */
+      align-items: center;
+      justify-content: center;
+    }
+    .slider{
+      height: 5px;
+      position: relative;
+      background: #ddd;
+      border-radius: 5px;
+    }
+    .slider .progress{
+      height: 100%;
+      left: 25%;
+      right: 25%;
+      position: absolute;
+      border-radius: 5px;
+      background: #17A2B8;
+    }
+    .range-input{
+      position: relative;
+    }
+    .range-input input{
+      position: absolute;
+      width: 100%;
+      height: 5px;
+      top: -5px;
+      background: none;
+      pointer-events: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+    input[type="range"]::-webkit-slider-thumb{
+      height: 17px;
+      width: 17px;
+      border-radius: 50%;
+      background: #17A2B8;
+      pointer-events: auto;
+      -webkit-appearance: none;
+      box-shadow: 0 0 6px rgba(0,0,0,0.05);
+    }
+    input[type="range"]::-moz-range-thumb{
+      height: 17px;
+      width: 17px;
+      border: none;
+      border-radius: 50%;
+      background: #17A2B8;
+      pointer-events: auto;
+      -moz-appearance: none;
+      box-shadow: 0 0 6px rgba(0,0,0,0.05);
+    }
+  </style>
+
+  <body style="font-size: 13px">
+    {% extends "page/base.html" %} {% block title %} Blog {% endblock title %}
+    {% block content %}
+
+    <div class="row g-0">
+      <div class="col-sm-6 col-md-4 mb-4">
+        
+
+        
+
+        <!-- Department -->
+        <ul class="mb-4" style="list-style: none;">
+          <li class="mt-4"><h4 style="color: #1c1c1c; font-weight: bold;">Department</h4></li>
+          <li class="mt-3"><a style="text-decoration: none; color: #6f6f6f;" href="">Fresh Meat</a></li>
+          <li class="mt-3"><a style="text-decoration: none; color: #6f6f6f;" href="">Vegetables</a></li>
+          <li class="mt-3"><a style="text-decoration: none; color: #6f6f6f;" href="">Fruit & Nut Gifts</a></li>
+          <li class="mt-3"><a style="text-decoration: none; color: #6f6f6f;" href="">Fresh Berries</a></li>
+          <li class="mt-3"><a style="text-decoration: none; color: #6f6f6f;" href="">Ocean Foods</a></li>
+          <li class="mt-3"><a style="text-decoration: none; color: #6f6f6f;" href="">Butter & Eggs</a></li>
+          <li class="mt-3"><a style="text-decoration: none; color: #6f6f6f;" href="">Fastfood</a></li>
+          <li class="mt-3"><a style="text-decoration: none; color: #6f6f6f;" href="">Fresh Onion</a></li>
+          <li class="mt-3"><a style="text-decoration: none; color: #6f6f6f;" href="">Papayaya & Crisps</a></li>
+          <li class="mt-3"><a style="text-decoration: none; color: #6f6f6f;" href="">Oatmeal</a></li>
+        </ul>
+        <!-- end Department -->
+
+        <!-- Price -->
+        <div class="wrapper col-12 col-md-11 mb-4">
+          <header>
+            <p>Price</p>
+          </header>
+          <div class="price-input">
+            <div class="field">
+              <span>Min</span>
+              <input type="number" class="input-min" value="2500">
+            </div>
+            <div class="separator">-</div>
+            <div class="field">
+              <span>Max</span>
+              <input type="number" class="input-max" value="7500">
+            </div>
+          </div>
+          <div class="slider">
+            <div class="progress"></div>
+          </div>
+          <div class="range-input">
+            <input type="range" class="range-min" min="0" max="10000" value="2500" step="100">
+            <input type="range" class="range-max" min="0" max="10000" value="7500" step="100">
+          </div>
+        </div>
+        <!-- end price -->
+
+        <!-- Colors -->
+        <div class="mx-4">
+          <h4 class="mx-2" style="font-weight: bold;">Colors</h4>
+         
+          <div class="col-12 g-0 d-flex mx-2 mb-3 mt-4">
+            <div class="col-6 col-md-6 d-flex">
+              <div class="me-4" style="background-color: #fff; border: #1c1c1c solid 2px; width: 18px; height: 18px; border-radius: 100%;"></div>
+              <span>White</span>
+            </div>
+            <div class="col-6 col-md-6 d-flex" style="padding-left: 1rem;">
+              <div class="me-4" style="background-color: #f7ab13; width: 18px; height: 18px; border-radius: 100%;"></div>
+              <span>Gray</span>
+            </div>
+          </div>
+
+          <div class="col-12 g-0 d-flex mx-2 mb-3 mt-4">
+            <div class="col-6 col-md-6 d-flex">
+              <div class="me-4" style="background-color: red;  width: 18px; height: 18px; border-radius: 100%;"></div>
+              <span>Red</span>
+            </div>
+            <div class="col-6 col-md-6 d-flex" style="padding-left: 1rem;">
+              <div class="me-4" style="background-color: greenyellow; width: 18px; height: 18px; border-radius: 100%;"></div>
+              <span>Green</span>
+            </div>
+          </div>
+
+          <div class="col-12 g-0 d-flex mx-2 mb-3 mt-4">
+            <div class="col-6 col-md-6 d-flex">
+              <div class="me-4" style="background-color: rgb(6, 135, 164); width: 18px; height: 18px; border-radius: 100%;"></div>
+              <span>Blue</span>
+            </div>
+            <div class="col-6 col-md-6 d-flex" style="padding-left: 1rem;">
+              <div class="me-4" style="background-color: black; width: 18px; height: 18px; border-radius: 100%;"></div>
+              <span>Black</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- end colors -->
+
+        <!-- Popular Size -->
+
+        <div class="container mt-4">
+          <div style="height: 20px;"></div>
+          <h4 class="mx-3" style="font-weight: bold;">Popular Size</h4>
+          <div class="row row-cols-3 row-cols-lg-3 g-2 g-lg-3 mx-3 mt-2">
+            <div class="col me-3 border bg-light" style="width: auto; height: 30px;">
+              <div class="p-2">Large</div>
+            </div>
+            <div class="col me-3 border bg-light"  style="width: auto; height: 30px;">
+              <div class="p-2">Medium</div>
+            </div>
+            <div class="col me-3 border bg-light"  style="width: auto; height: 30px;">
+              <div class="p-2">Small</div>
+            </div>
+            <div class="col me-3 border bg-light"  style="width: auto; height: 30px;">
+              <div class="p-2">Tiny</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Popular Size -->
+
+        <!-- Latest products -->
+        <div class="mx-4 mt-4">
+          <div style="height: 20px;"></div>
+          <h4 class="mx-2" style="font-weight: bold;">Latest Products</h4>
+          {% for shop in shops|slice:":3" %}
+          <div class="col-12 g-0 d-flex mx-2 mb-3 mt-4">
+            <div class="col-3 col-md-3">
+              <img style="height: 5rem; width: 100%;" src="{{shop.image.url}}" class="img-fluid" alt="...">
+            </div>
+            <div class="col-9 col-md-9" style="padding-left: 1rem;">
+              <p style="font-weight: bold; font-size: 12px;">{{shop.productName}}</p>
+               
+              <p style="color: #6f6f6f; font-size: 10px;">{{shop.date}}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <!-- end Latest products -->
+
+        
+
+
+      </div>
+      <!-- content card -->
+      <div class="col-sm-6 col-md-8 mt-4">
+        <h2 class="mx-3" style="font-weight: bold;">Sale Off</h2>
+        <hr class="mx-3" style="width: 100px; height: 3px; background-color: #79c10c; border: none;">
+        
+        <!-- card sale off-->
+        <div class="row col-12 mx-0">
+          
+          
+          {% for shop in shops %}
+          <div
+            class="mb-4 mt-4 me-auto card shadow-none col-12 col-md-4 col-sm-6"
+            style="
+           
+              border-radius: 0;
+              border: none;
+              background-color: transparent;
+            "
+          >
+            
+            <div style="background: #17A2B8; height: 250px; position: relative;">
+              <div style="width: 20%; height: 20%; background-color: red; 
+                border-radius: 100%; margin-top: 10%; margin-left: 10%; position: absolute;
+              "><h6 style="text-align: center; padding-top: 17px; font-weight: 600; color: white;">-20%</h6></div>
+              <img
+              style="height: 60%; border-radius: 0; width: 60%; margin-left: 20%; margin-top: 20%;"
+              src="{{shop.image.url}}"
+              class="card-img-top img-fluid"
+            />
+            </div>
+            
+            <div class="card-body w-100 text-center">
+              <div style="color: #6f6f6f">
+                <p>{{shop.category}}</p>
+              </div>
+
+              <p
+                style="font-size: 16px; font-weight: 700"
+                class="card-title"
+              >
+                <a
+                  style="text-decoration: none; color: #1c1c1c"
+                  {% comment %} href="{% url 'post' post.id %}" {% endcomment %}
+                  >{{shop.productName}}</a
+                >
+              </p>
+
+              <div style="display: flex; justify-content: center;">
+                <p style="font-size: 15px; font-weight: bold; color: #1c1c1c;">$ {{shop.price}}</p>
+                <p style="font-size: 13px; color: #6f6f6f; margin-left: 20px;"><s>$ 3500.0</s></p>
+              </div>
+
+              
+            </div>
+          </div>
+
+          {% endfor %}
+        </div>
+
+        <!-- card -->
+
+        <hr class="mx-3">
+        <br />
+
+        <!-- 16 products found -->
+
+        <div class="row g-0 text-center">
+          <div class="col-sm-6 col-md-4 d-flex">
+            <p class="mt-1 me-4 mx-3" style="font-size: 16px;">Sort By</p>
+            <div class="dropdown-center">
+              <button style="font-weight: bold;" class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Default
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Default</a></li>
+                <li><a class="dropdown-item" href="#">Action two</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4" style="font-size: 16px;"><b>16</b><span style="color: #6f6f6f;" class="mx-2">Products found</span></div>
+          <div class="col-sm-6 col-md-4 d-flex justify-content-end" style="padding-right: 20px; font-size: 20px; color: #6f6f6f;">
+            <i class="bi bi-grid-fill me-4"></i>
+            <i class="bi bi-list-task"></i>
+          </div>
+        </div>
+          
+          <!-- card -->
+          <div class="row col-12 mx-0">
+            
+            
+            {% for shop in shops %}
+            <div
+              class="mb-4 mt-4 me-auto card shadow-none col-12 col-md-4 col-sm-6"
+              style="
+             
+                border-radius: 0;
+                border: none;
+                background-color: transparent;
+              "
+            >
+              
+              <div style="background: #17A2B8; height: 250px; position: relative;">
+                <img
+                style="height: 60%; border-radius: 0; width: 60%; margin-left: 20%; margin-top: 20%;"
+                src="{{shop.image.url}}"
+                class="card-img-top img-fluid"
+              />
+              </div>
+              
+              <div class="card-body w-100 text-center">
+                <!-- <div style="color: #6f6f6f">
+                  <p>{{shop.category}}</p>
+                </div> -->
+  
+                <p
+                  style="font-size: 16px;"
+                  class="card-title"
+                >
+                  <a
+                    style="text-decoration: none; color: #6f6f6f"
+                    href="{% url 'shopDetail' shop.id %}"
+                    >{{shop.productName}}</a
+                  >
+                </p>
+  
+                <div style="display: flex; justify-content: center;">
+                  <p style="font-size: 15px; font-weight: bold; color: #1c1c1c;">$ {{shop.price}}</p>
+                </div>
+  
+                
+              </div>
+            </div>
+  
+            {% endfor %}
+          
+
+        <!-- end 16 products found -->
+
+
+
+
+        <div style="display: flex" class="mb-4">
+          {% if page_obj.has_previous %}
+            <a
+              class="mx-2"
+              href="{{request.path}}?page={{ page_obj.previous_page_number }}"
+              style="
+                border: solid 1px grey;
+                height: 20px;
+                width: 20px;
+                text-align: center;
+                text-decoration: none;
+              "
+            >
+              <i class="bi bi-arrow-left-short"></i>
+            </a>
+          {% endif %} 
+          
+          {% for num in page_obj.paginator.page_range %} 
+            {% if num == page_obj.number %}
+              <span
+                class="current-page mx-1"
+                style="
+                  border: solid 1px grey;
+                  height: 20px;
+                  width: 20px;
+                  text-align: center;
+                "
+                >{{ num }}</span>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+              <a
+                href="?page={{ num }}"
+                class="mx-1"
+                style="
+                  border: solid 1px grey;
+                  height: 20px;
+                  width: 20px;
+                  text-align: center;
+                  text-decoration: none;
+                "
+                >{{ num }}</a>
+            {% endif %} 
+
+          {% endfor %} 
+
+            {% if page_obj.has_next %}
+            <a
+              class="mx-2"
+              href="{{request.path}}?page={{page_obj.next_page_number}}"
+              style="
+                border: solid 1px grey;
+                height: 20px;
+                width: 20px;
+                text-align: center;
+                text-decoration: none;
+              "
+            >
+              <i class="bi bi-arrow-right-short"></i>
+            </a>
+            {% endif %}
+        </div>
+      </div>
+      <!-- content -->
+    </div>
+
+    {% endblock content %}
+
+    <script src="" async defer></script>
+  </body>
+  <script>
+    const rangeInput = document.querySelectorAll(".range-input input"),
+    priceInput = document.querySelectorAll(".price-input input"),
+    range = document.querySelector(".slider .progress");
+    let priceGap = 1000;
+
+    priceInput.forEach(input =>{
+        input.addEventListener("input", e =>{
+            let minPrice = parseInt(priceInput[0].value),
+            maxPrice = parseInt(priceInput[1].value);
+            
+            if((maxPrice - minPrice >= priceGap) && maxPrice <= rangeInput[1].max){
+                if(e.target.className === "input-min"){
+                    rangeInput[0].value = minPrice;
+                    range.style.left = ((minPrice / rangeInput[0].max) * 100) + "%";
+                }else{
+                    rangeInput[1].value = maxPrice;
+                    range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
+                }
+            }
+        });
+    });
+
+    rangeInput.forEach(input =>{
+        input.addEventListener("input", e =>{
+            let minVal = parseInt(rangeInput[0].value),
+            maxVal = parseInt(rangeInput[1].value);
+
+            if((maxVal - minVal) < priceGap){
+                if(e.target.className === "range-min"){
+                    rangeInput[0].value = maxVal - priceGap
+                }else{
+                    rangeInput[1].value = minVal + priceGap;
+                }
+            }else{
+                priceInput[0].value = minVal;
+                priceInput[1].value = maxVal;
+                range.style.left = ((minVal / rangeInput[0].max) * 100) + "%";
+                range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
+            }
+        });
+    });
+  </script>
+
+
+
+</html>
+
+

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loign</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <link
+      href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  </head>
+
+  <style>
+    .form-group input{
+      height:40px;
+      width: 100%;
+      border: 1px solid grey;
+      padding-left: 15px;
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+
+    }
+  </style>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+          <div class="panel panel-default">
+            <div class="panel-heading" style="display: flex">
+              <div>
+                <h3 class="panel-title">Login via site</h3>
+              </div>
+
+              <div style="margin-left: auto;">
+                <a href="/">
+                  <i class="bi bi-x-square"></i>
+                </a>
+              </div>
+
+            </div>
+            <div class="panel-body">
+              {% if form.errors %}
+              <div class="alert alert-danger">
+                <strong>Lỗi!</strong> Vui lòng kiểm tra lại thông tin đăng nhập.
+              </div>
+              {% endif %}
+              <form accept-charset="UTF-8" role="form" action="." method="POST">
+                {% csrf_token %}
+
+                <!-- {% for key.value in form.errors.items %}
+                                {{value}}
+                            {% endfor %} -->
+
+                <fieldset>
+                  <div class="form-group">
+
+
+                    <div class="input-group">
+												<span class="input-group-addon">
+													<i class="glyphicon glyphicon-user"></i>
+												</span> 
+												{{form.username}}
+											</div>
+
+                    <!-- {% for error in form.username.errors %}
+                                    <div class="text-danger">{{ error }}</div>
+                                {% endfor %} -->
+                  </div>
+
+                  <div class="form-group">
+                    <div class="input-group">
+											<span class="input-group-addon">
+												<i class="glyphicon glyphicon-lock"></i>
+											</span>
+												{{form.password}}
+										</div>
+
+                    <!-- {% for error in form.password.errors %}
+                                    <div class="text-danger">{{ error }}</div>
+                                {% endfor %} -->
+                  </div>
+                  <div class="checkbox">
+                    <label>
+                      <input
+                        name="remember"
+                        type="checkbox"
+                        value="Remember Me"
+                      />
+                      Remember Me
+                    </label>
+                  </div>
+                  <input type="hidden" name="next" value="/" />
+                  <input
+                    class="btn btn-lg btn-success btn-block"
+                    type="submit"
+                    value="Login"
+                  />
+                </fieldset>
+              </form>
+              <hr />
+              <center><h4>OR</h4></center>
+              <a href="{% url 'facebook_login' %}">
+                <input
+                  class="btn btn-lg btn-facebook btn-block"
+                  type="submit"
+                  value="Login via facebook"
+                />
+              </a>
+
+              
+              <p style="text-align: center; margin-top: 20px;">
+                You don't have account? 
+                <a href="{% url 'register' %}"
+                  >Sign up</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div>
+        <form action="." method="POST">
+            {% csrf_token %}
+            
+            {% for key.value in form.errors.items %}
+                                    {{value}}
+                                {% endfor %}
+
+            <p><label>Username: </label>{{form.username}}</p>
+            <p><label>Password: </label>{{form.password}}</p>
+            <input type="hidden" name="next" value="/"/>
+            <input type="submit" value="Login">
+        </form>
+    </div> -->
+  </body>
+
+  <style>
+    .white {
+      color: #000;
+      background-color: #fff;
+    }
+
+    .container {
+      margin-top: 30px;
+    }
+
+    .btn-facebook {
+      color: #ffffff;
+      -webkit-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+      background-color: #2b4b90;
+      *background-color: #133783;
+      background-image: -moz-linear-gradient(top, #3b5998, #133783);
+      background-image: -webkit-gradient(
+        linear,
+        0 0,
+        0 100%,
+        from(#3b5998),
+        to(#133783)
+      );
+      background-image: -webkit-linear-gradient(top, #3b5998, #133783);
+      background-image: -o-linear-gradient(top, #3b5998, #133783);
+      background-image: linear-gradient(to bottom, #3b5998, #133783);
+      background-repeat: repeat-x;
+      border-color: #133783 #133783 #091b40;
+      border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff3b5998', endColorstr='#ff133783', GradientType=0);
+      filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    }
+
+    .btn-facebook:hover,
+    .btn-facebook:focus,
+    .btn-facebook:active,
+    .btn-facebook.active,
+    .btn-facebook.disabled,
+    .btn-facebook[disabled] {
+      color: #ffffff;
+      background-color: #133783 !important;
+      *background-color: #102e6d !important;
+    }
+
+    .btn-facebook:active,
+    .btn-facebook.active {
+      background-color: #0d2456 \9 !important;
+    }
+  </style>
+</html>
